@@ -27,6 +27,9 @@ jobs:
       - name: Find and copy the files
         run: find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp -v {} /tmp/ \;
 
+      - name: Create tarball
+        run: sudo tar -czvf artifacts.tar.gz -C /tmp/ .
+
       # - name: Upload artifacts
       #   uses: actions/upload-artifact@v3
       #   with:
