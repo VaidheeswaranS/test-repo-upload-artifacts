@@ -23,7 +23,7 @@ jobs:
 
       - name: Find and copy the files
         run: |
-          sudo find sample/ -type f -name "*.dll" -exec cp --parents {} temp/ \;
+          sudo find sample/ -type f -name "*.dll" -exec cp {} temp/ \;
           sudo tar -czf artifacts.tar.gz -C /tmp .
         shell: bash
 
