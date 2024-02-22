@@ -1,0 +1,38 @@
+name: Upload Artifacts
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print current working directory
+        run: pwd
+
+      - name: Creating a folder for artifacts
+        run: mkdir temp/
+
+      - name: Listing the location to check if the folder is created
+        run: ls -l
+
+      - name: Find and copy the files
+        run: |
+          sudo find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp {} temp/ \;
+        shell: bash
+
+      - name: Listing the temp folder
+        run: |
+          cd temp/
+          ls -la
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: temp/
