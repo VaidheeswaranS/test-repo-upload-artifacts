@@ -15,23 +15,20 @@ jobs:
       - name: Print current working directory
         run: pwd
 
-      - name: check permission for temporary folder
-        run: ls -ld /tmp/
+      - name: Creating a folder for artifacts
+        run: mkdir temp/
 
-      - name: Adjust Permission for Temporary folder
-        run: sudo chmod 777 /tmp/
+      - name: Listing the location to check if the folder is created
+        run: ls -l
 
-      - name: Checking permission of temporary folder after running chmod command
-        run: ls -ld /tmp/
+      # - name: Find and copy the files
+      #   run: |
+      #     find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp -v {} temp \;
+      #     tar -czf artifacts.tar.gz -C /tmp .
+      #   shell: bash
 
-      - name: Find and copy the files
-        run: find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp -v {} /tmp/ \;
-
-      - name: Create tarball
-        run: sudo tar -czvf artifacts.tar.gz -C /tmp/ .
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: artifacts.tar.gz
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: my-artifact
+      #     path: artifacts.tar.gz
