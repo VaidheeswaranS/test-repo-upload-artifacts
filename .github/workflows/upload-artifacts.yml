@@ -10,7 +10,6 @@ jobs:
 
     env:
       EXTENSIONS: ".dll .exe .msi"
-      COPY_COMMAND: 'find sample/ -type f \( -name "*" -a -name "{}" \) -exec cp {} temp/ \\;'
     
     steps:
       - name: checkout repository
@@ -29,7 +28,7 @@ jobs:
         run: |
           IFS=' ' read -ra EXT_ARRAY <<< "$EXTENSIONS"
           for EXT in "${EXT_ARRAY[@]}"; do
-            eval "$COPY_COMMAND"
+            find sample/ -type f -name "*$EXT" -exec cp {} temp/ \;
           done
 
       - name: Listing the temp folder
