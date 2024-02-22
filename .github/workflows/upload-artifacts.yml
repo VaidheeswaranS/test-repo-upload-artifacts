@@ -32,8 +32,8 @@ jobs:
           cd temp/
           ls -la
 
-      # - name: Upload artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: my-artifact
-      #     path: artifacts.tar.gz
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifacts.tar.gz
