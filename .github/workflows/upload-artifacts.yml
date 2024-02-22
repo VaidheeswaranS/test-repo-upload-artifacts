@@ -10,7 +10,7 @@ jobs:
 
     env:
       EXTENSIONS: ".dll .exe .msi"
-      COPY_COMMAND: "find sample/ -type f \( -name {} \) -exec cp -v {} temp/ \\;"
+      COPY_COMMAND: "find sample/ -type f ( -name {} ) -exec cp -v {} temp/ \\;"
     
     steps:
       - name: checkout repository
