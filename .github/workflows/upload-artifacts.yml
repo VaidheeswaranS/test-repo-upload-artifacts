@@ -23,7 +23,7 @@ jobs:
 
       - name: Find and copy the files
         run: |
-          sudo find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp {} temp/ \;
+          sudo find sample/ -type f \(-name "*.dll" -o -name "*.exe" -o -name "*.msi"\) -exec cp {} temp/ \;
         shell: bash
 
       - name: Listing the temp folder
