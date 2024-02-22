@@ -24,11 +24,8 @@ jobs:
       - name: Checking permission of temporary folder after running chmod command
         run: ls -ld /tmp/
 
-      # - name: Make the files ready
-      #   run: |
-      #     find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp {} /tmp/ \;
-      #     tar -czf artifacts.tar.gz -C /tmp .
-      #   shell: bash
+      - name: Find and copy the files
+        run: find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp -v {} /tmp/ \;
 
       # - name: Upload artifacts
       #   uses: actions/upload-artifact@v3
