@@ -17,6 +17,6 @@ jobs:
         with:
           name: my-artifact
           path: |
-            sample/**/*.dll
-            sample**/*.exe
-            sample/**/*.msi
+            **/*.dll
+            **/*.exe
+            **/*.msi
