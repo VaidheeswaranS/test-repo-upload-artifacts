@@ -19,7 +19,7 @@ jobs:
         run: ls -ld /tmp/
 
       - name: Adjust Permission for Temporary folder
-        run: chmod 777 /tmp/
+        run: sudo chmod 777 /tmp/
 
       - name: Checking permission of temporary folder after running chmod command
         run: ls -ld /tmp/
