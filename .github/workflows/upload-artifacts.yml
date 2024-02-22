@@ -21,11 +21,16 @@ jobs:
       - name: Listing the location to check if the folder is created
         run: ls -l
 
-      # - name: Find and copy the files
-      #   run: |
-      #     find sample/ -type f -name "*.dll" -o -name "*.exe" -o -name "*.msi" -exec cp -v {} temp \;
-      #     tar -czf artifacts.tar.gz -C /tmp .
-      #   shell: bash
+      - name: Find and copy the files
+        run: |
+          find sample/ -type f -name "*.dll" -exec cp --parents {} temp/ \;
+          tar -czf artifacts.tar.gz -C /tmp .
+        shell: bash
+
+      - name: Listing the temp folder
+        run: |
+          cd temp/
+          ls -la
 
       # - name: Upload artifacts
       #   uses: actions/upload-artifact@v3
