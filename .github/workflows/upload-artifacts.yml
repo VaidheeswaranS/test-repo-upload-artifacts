@@ -1,0 +1,22 @@
+name: Upload Artifacts
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout repository
+      - uses: actions/checkout@v3
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: |
+            sample/**/*.dll
+            sample**/*.exe
+            sample/**/*.msi
