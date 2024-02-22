@@ -7,6 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      EXTENSIONS: ".dll .exe .msi"
+      COPY_COMMAND: "find sample/ -type f \( -name {} \) -exec cp -v {} temp/ \\;"
     
     steps:
       - name: checkout repository
@@ -23,8 +27,10 @@ jobs:
 
       - name: Find and copy the files
         run: |
-          sudo find sample/ -type f \( -name "*.dll" -o -name "*.exe" -o -name "*.msi" \) -exec cp {} temp/ \;
-        shell: bash
+          IFS=' ' read -ra EXT_ARRAY <<< "$EXTENSIONS"
+          for EXT in "${EXT_ARRAY[@]}"; do
+            eval "$COPY_COMMAND"
+          done
 
       - name: Listing the temp folder
         run: |
