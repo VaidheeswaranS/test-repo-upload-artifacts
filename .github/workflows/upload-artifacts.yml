@@ -24,7 +24,6 @@ jobs:
       - name: Find and copy the files
         run: |
           sudo find sample/ -type f -name "*.dll" -exec cp {} temp/ \;
-          sudo tar -czf artifacts.tar.gz -C temp/ .
         shell: bash
 
       - name: Listing the temp folder
@@ -36,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: artifacts.tar.gz
+          path: temp/
