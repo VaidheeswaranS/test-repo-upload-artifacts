@@ -43,7 +43,11 @@ jobs:
           container_name: binaries
           connection_string: ${{ secrets.ConnectionString }}
           overwrite: 'true'
-        
+
+      - name: Listing the temp folder once artficats are pushed to blob storage
+        run: |
+          cd temp/
+          ls -la      
 
       # - name: Uploading artifacts to azure storage account
       #   uses: azure/CLI@v1
