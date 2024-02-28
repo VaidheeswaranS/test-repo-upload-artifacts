@@ -36,6 +36,13 @@ jobs:
           cd temp/
           ls -la
 
+      - name: Uploading artifacts to azure storage account
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.72
+          inlineScript: |
+            az storage blob upload-batch --source temp/* --destination binaries --account-name vaidheestorageacc --sas-token ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
