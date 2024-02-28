@@ -36,15 +36,24 @@ jobs:
           cd temp/
           ls -la
 
-      - name: Uploading artifacts to azure storage account
-        uses: azure/CLI@v1
+      - name: Upload artifacts to blob storage
+        uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          azcliversion: 2.0.72
-          inlineScript: |
-            az storage blob upload-batch --source temp/* --destination binaries --account-name vaidheestorageacc --sas-token ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+          source_dir: temp
+          container_name: binaries
+          connection_string: ${{ secrets.ConnectionString }}
+          overwrite: 'true'
+        
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: temp/
+      # - name: Uploading artifacts to azure storage account
+      #   uses: azure/CLI@v1
+      #   with:
+      #     azcliversion: 2.0.72
+      #     inlineScript: |
+      #       az storage blob upload-batch --source temp/* --destination binaries --account-name vaidheestorageacc --sas-token ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: my-artifact
+      #     path: temp/
