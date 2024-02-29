@@ -43,6 +43,7 @@ jobs:
       - name: Upload artifacts to azure blob storage using service principal
         uses: azure/CLI@v1
         with:
+          azcliversion: 2.34.0
           inlineScript: |
             az storage blob upload-batch --account-name vaidheestorageacc --auth-mode key -d 'binariessecondary' -s temp/*
 
