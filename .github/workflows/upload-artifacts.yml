@@ -12,10 +12,8 @@ jobs:
       EXTENSIONS: ".dll .exe .msi"
     
     steps:
-      - uses: actions/checkout@v3
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Checout the repository
+        uses: actions/checkout@v3
 
       - name: Print current working directory
         run: pwd
@@ -38,23 +36,15 @@ jobs:
           cd temp/
           ls -la
 
-      # Using Azure Service Pricipal to upload the artifacts to Blob Storage
+      # Using SAS connection string to upload the artifacts to Blob Storage
       
-      - name: Upload artifacts to azure blob storage using service principal
-        uses: azure/CLI@v1
+      - name: Upload artifacts to blob storage
+        uses: bacongobbler/azure-blob-storage-upload@3.0.0
         with:
-          inlineScript: |
-            az storage blob upload-batch -d 'binariessecondary' -s temp/*
-
-      # Using SAS token to upload the artifacts to Blob Storage
-      
-      # - name: Upload artifacts to blob storage
-      #   uses: bacongobbler/azure-blob-storage-upload@main
-      #   with:
-      #     source_dir: temp
-      #     container_name: binaries
-      #     connection_string: ${{ secrets.ConnectionString }}
-      #     overwrite: 'true'
+          source_dir: temp
+          container_name: binariessecondary
+          connection_string: ${{ secrets.ConnectionString }}
+          overwrite: 'true'
 
       - name: Listing the temp folder once artficats are pushed to blob storage
         run: |
