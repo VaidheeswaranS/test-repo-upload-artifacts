@@ -42,7 +42,7 @@ jobs:
         uses: bacongobbler/azure-blob-storage-upload@v3.0.0
         with:
           source_dir: temp
-          container_name: binariessecondary
+          container_name: binaries
           connection_string: ${{ secrets.ConnectionString }}
           overwrite: 'true'
 
