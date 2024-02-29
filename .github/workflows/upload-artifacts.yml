@@ -39,7 +39,7 @@ jobs:
       # Using SAS connection string to upload the artifacts to Blob Storage
       
       - name: Upload artifacts to blob storage
-        uses: bacongobbler/azure-blob-storage-upload@v1.2.0
+        uses: bacongobbler/azure-blob-storage-upload@v2.0.0
         with:
           source_dir: temp
           container_name: binaries
