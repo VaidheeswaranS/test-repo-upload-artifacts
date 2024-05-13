@@ -26,6 +26,4 @@ jobs:
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
             - name: Delete all files
-              run: |
-                  cd ${{ github.workspace }}
-                  rm -rf
+              run: rd /Q /S ${{ github.workspace }}
