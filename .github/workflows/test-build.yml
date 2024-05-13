@@ -1,0 +1,25 @@
+name: Test Build
+
+on:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+env:
+  msbuild-dir: 'C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin'
+
+jobs:
+    build:
+        name: Test Build
+        runs-on: self-hosted
+
+        steps:
+            - name: checkout the repository
+              uses: actions/checkout@v4
+
+            - name: check NPM version
+              run: npm --version
+
+            - name: check msbuild version
+              run: ${{ env.msbuild-dir }}\msbuild.exe --version
