@@ -22,4 +22,5 @@ jobs:
               run: npm --version
 
             - name: check msbuild version
-              run: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\msbuild.exe --version
+              run: |
+                  & "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\msbuild.exe" --version
