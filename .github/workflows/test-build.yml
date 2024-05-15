@@ -27,8 +27,7 @@ jobs:
 
             - name: edit the file
               run: |
-                  dir
-                  .\sample\script.ps1
+                  ./sample/script.ps1
 
             # - name: edit the file
             #   # shell: powershell
