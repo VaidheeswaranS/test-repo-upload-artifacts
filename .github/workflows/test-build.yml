@@ -25,16 +25,15 @@ jobs:
               run: |
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
-            - name: get the service name
-              run: powershell "(Get-Service actions.runner.*).name"
+            # - name: get the service name
+            #   run: powershell "(Get-Service actions.runner.*).name"
 
-            - name: run the cmd command
-              shell: cmd
-              run: sc config "actions.runner.VaidheeswaranS-test-repo-upload-artifacts.test-vm" obj= "NT AUTHORITY\SYSTEM" type= own
+            # - name: run the cmd command
+            #   shell: cmd
+            #   run: sc config "actions.runner.VaidheeswaranS-test-repo-upload-artifacts.test-vm" obj= "NT AUTHORITY\SYSTEM" type= own
 
             - name: edit the file
-              # shell: pwsh
-              run: .\sample\script.ps1
+              run: .\sample\script.ps1 -RunAsAdmin
 
             # - name: edit the file
             #   # shell: powershell
