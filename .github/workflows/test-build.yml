@@ -26,32 +26,37 @@ jobs:
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
             - name: edit the file
-              # shell: powershell
               run: |
-                  $command = {
-                      param (
-                          [string]$filePath,
-                          [string]$oldLineContent,
-                          [string]$newLineContent
-                      )
+                  dir
+                  .\sample\script.ps1
 
-                      Write-Output "Reading file: $filePath"
-                      $lines = Get-Content -Path $filePath
-              
-                      Write-Output "Replacing content..."
-                      $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
-              
-                      Write-Output "Writing updated content to file..."
-                      Set-Content -Path $filePath -Value $updatedLines
-              
-                      Write-Output "File update complete."
-                  }
+            # - name: edit the file
+            #   # shell: powershell
+            #   run: |
+            #       $command = {
+            #           param (
+            #               [string]$filePath,
+            #               [string]$oldLineContent,
+            #               [string]$newLineContent
+            #           )
 
-                  $filePath = "C:\\path\\to\\your\\file.txt"
-                  $oldLineContent = "line 2"
-                  $newLineContent = "line changed"
+            #           Write-Output "Reading file: $filePath"
+            #           $lines = Get-Content -Path $filePath
+              
+            #           Write-Output "Replacing content..."
+            #           $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
+              
+            #           Write-Output "Writing updated content to file..."
+            #           Set-Content -Path $filePath -Value $updatedLines
+              
+            #           Write-Output "File update complete."
+            #       }
 
-                  Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
+            #       $filePath = "C:\\path\\to\\your\\file.txt"
+            #       $oldLineContent = "line 2"
+            #       $newLineContent = "line changed"
+
+            #       Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
 
             - name: Delete all files
               run: Remove-Item ${{ github.workspace }} -Recurse -Force -ErrorAction SilentlyContinue
