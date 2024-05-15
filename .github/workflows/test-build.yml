@@ -27,7 +27,14 @@ jobs:
 
             - name: edit the file
               run: |
-                  ./sample/script.ps1
+                  $file = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
+                  $oldContent = "line 2"
+                  $newContent = "line changed"
+        
+                  $content = Get-Content -Path $file
+                  $content[1] = $newContent
+                  $content | Set-Content -Path $file
+              shell: powershell
 
             # - name: edit the file
             #   # shell: powershell
