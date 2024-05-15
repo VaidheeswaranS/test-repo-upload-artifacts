@@ -29,21 +29,28 @@ jobs:
               # shell: powershell
               run: |
                   $command = {
-                      param(
+                      param (
                           [string]$filePath,
                           [string]$oldLineContent,
                           [string]$newLineContent
                       )
 
-                      $lines = Get-Content $filePath
+                      Write-Output "Reading file: $filePath"
+                      $lines = Get-Content -Path $filePath
+              
+                      Write-Output "Replacing content..."
                       $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
-                      $updatedLines | Set-Content $filePath
+              
+                      Write-Output "Writing updated content to file..."
+                      Set-Content -Path $filePath -Value $updatedLines
+              
+                      Write-Output "File update complete."
                   }
-                  
-                  $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
+
+                  $filePath = "C:\\path\\to\\your\\file.txt"
                   $oldLineContent = "line 2"
                   $newLineContent = "line changed"
-                  
+
                   Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
 
             - name: Delete all files
