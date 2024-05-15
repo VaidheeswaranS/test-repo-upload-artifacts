@@ -1,24 +1,13 @@
-$command = {
-                      param (
-                          [string]$filePath,
-                          [string]$oldLineContent,
-                          [string]$newLineContent
-                      )
+$filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
+$oldContent = "line 2"
+$newContent = "line changed"
 
-                      Write-Output "Reading file: $filePath"
-                      $lines = Get-Content -Path $filePath
-              
-                      Write-Output "Replacing content..."
-                      $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
-              
-                      Write-Output "Writing updated content to file..."
-                      Set-Content -Path $filePath -Value $updatedLines
-              
-                      Write-Output "File update complete."
-                  }
+$content = Get-Content -Path $filePath
+$updatedContent = $content -replace [regex]::Escape($oldContent), $newContent
 
-                  $filePath = "C:\\path\\to\\your\\file.txt"
-                  $oldLineContent = "line 2"
-                  $newLineContent = "line changed"
-
-                  Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
+if ($content -ne $updatedContent) {
+    $updatedContent | Set-Content -Path $filePath -Force
+    Write-Host "Content replaced successfully."
+} else {
+    Write-Host "Old content not found in the file."
+}
