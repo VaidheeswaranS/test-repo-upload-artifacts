@@ -27,7 +27,7 @@ jobs:
 
             - name: edit the file
               run: |
-                  $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets"
+                  $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
                   $oldLine = "line 2"
                   $newLine = "line changed"
                   (Get-Content $filePath) -replace $oldLine, $newLine | Set-Content $filePath
