@@ -26,7 +26,7 @@ jobs:
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
             - name: get the service name
-              run: Get-Service actions.runner.*.name
+              run: powershell "(Get-Service actions.runner.*).name"
 
             # - name: run the cmd command
             #   shell: cmd
