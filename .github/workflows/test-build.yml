@@ -33,7 +33,7 @@ jobs:
         
                   $content = Get-Content -Path $file
                   $content[1] = $newContent
-                  $content | Set-Content -Path $file
+                  $content | Set-Content -Path $file -Force
               shell: powershell
 
             # - name: edit the file
