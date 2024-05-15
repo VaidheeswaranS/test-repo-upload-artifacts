@@ -25,6 +25,13 @@ jobs:
               run: |
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
+            - name: edit the file
+              run: |
+                  $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets"
+                  $oldLine = "line 2"
+                  $newLine = "line changed"
+                  (Get-Content $filePath) -replace $oldLine, $newLine | Set-Content $filePath
+
             - name: Delete all files
               # shell: cmd
               # run: rmdir /Q /S ${{ github.workspace }}
