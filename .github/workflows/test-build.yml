@@ -25,45 +25,38 @@ jobs:
               run: |
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
-            # - name: edit the file
-            #   run: |
-            #       $file = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
-            #       $oldContent = "line 2"
-            #       $newContent = "line changed"
-        
-            #       $content = Get-Content -Path $file
-            #       $content[1] = $newContent
-            #       $content | Set-Content -Path $file -Force
-            #   shell: powershell
-
             - name: edit the file
-              # shell: powershell
-              run: |
-                  $command = {
-                      param (
-                          [string]$filePath,
-                          [string]$oldLineContent,
-                          [string]$newLineContent
-                      )
+              shell: pwsh
+              run: .\sample\script.ps1
 
-                      Write-Output "Reading file: $filePath"
-                      $lines = Get-Content -Path $filePath
-              
-                      Write-Output "Replacing content..."
-                      $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
-              
-                      Write-Output "Writing updated content to file..."
-                      Set-Content -Path $filePath -Value $updatedLines
-              
-                      Write-Output "File update complete."
-                  }
+            # - name: edit the file
+            #   # shell: powershell
+            #   run: |
+            #       $command = {
+            #           param (
+            #               [string]$filePath,
+            #               [string]$oldLineContent,
+            #               [string]$newLineContent
+            #           )
 
-                  $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
-                  $oldLineContent = "line 2"
-                  $newLineContent = "line changed"
+            #           Write-Output "Reading file: $filePath"
+            #           $lines = Get-Content -Path $filePath
+              
+            #           Write-Output "Replacing content..."
+            #           $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
+              
+            #           Write-Output "Writing updated content to file..."
+            #           Set-Content -Path $filePath -Value $updatedLines
+              
+            #           Write-Output "File update complete."
+            #       }
 
-                  Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
-              shell: powershell
+            #       $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
+            #       $oldLineContent = "line 2"
+            #       $newLineContent = "line changed"
+
+            #       Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
+            #   shell: powershell
 
             - name: Delete all files
               run: Remove-Item ${{ github.workspace }} -Recurse -Force -ErrorAction SilentlyContinue
