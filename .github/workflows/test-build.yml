@@ -26,13 +26,25 @@ jobs:
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
             - name: edit the file
+              shell: pwsh
               run: |
+                  $command = {
+                      param(
+                          [string]$filePath,
+                          [string]$oldLineContent,
+                          [string]$newLineContent
+                      )
+
+                      $lines = Get-Content $filePath
+                      $updatedLines = $lines -replace [regex]::Escape($oldLineContent), $newLineContent
+                      $updatedLines | Set-Content $filePath
+                  }
+                  
                   $filePath = "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.Targets\ImportAfter\test.targets.txt"
-                  $oldLine = "line 2"
-                  $newLine = "line changed"
-                  (Get-Content $filePath) -replace $oldLine, $newLine | Set-Content $filePath
+                  $oldLineContent = "line 2"
+                  $newLineContent = "line changed"
+                  
+                  Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `$command -filePath '$filePath' -oldLineContent '$oldLineContent' -newLineContent '$newLineContent'" -Verb RunAs
 
             - name: Delete all files
-              # shell: cmd
-              # run: rmdir /Q /S ${{ github.workspace }}
               run: Remove-Item ${{ github.workspace }} -Recurse -Force -ErrorAction SilentlyContinue
