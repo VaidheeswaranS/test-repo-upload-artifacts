@@ -25,9 +25,16 @@ jobs:
               run: |
                   & "${{ env.msbuild-dir }}\msbuild.exe" --version
 
-            - name: edit the file
-              # shell: pwsh
-              run: .\sample\script.ps1
+            - name: get the service name
+              run: Get-Service actions.runner.*.name
+
+            # - name: run the cmd command
+            #   shell: cmd
+            #   run: Get-Service actions.runner.*).name
+
+            # - name: edit the file
+            #   # shell: pwsh
+            #   run: .\sample\script.ps1
 
             # - name: edit the file
             #   # shell: powershell
