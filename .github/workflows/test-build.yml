@@ -34,8 +34,7 @@ jobs:
 
             - name: edit the file
               run: |
-                  cd C:\dev
-                  mkdir Key
+                  mkdir C:\dev\Key
                   dir C:\dev
                   .\sample\script.ps1
 
