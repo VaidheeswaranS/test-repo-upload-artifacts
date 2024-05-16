@@ -33,7 +33,11 @@ jobs:
             #   run: sc config "actions.runner.VaidheeswaranS-test-repo-upload-artifacts.test-vm" obj= "NT AUTHORITY\SYSTEM" type= own
 
             - name: edit the file
-              run: .\sample\script.ps1
+              run: |
+                  cd C:\dev
+                  mkdir Key
+                  dir C:\dev
+                  .\sample\script.ps1
 
             # - name: edit the file
             #   # shell: powershell
