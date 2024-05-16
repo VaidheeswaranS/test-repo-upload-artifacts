@@ -32,17 +32,17 @@ jobs:
             #   shell: cmd
             #   run: sc config "actions.runner.VaidheeswaranS-test-repo-upload-artifacts.test-vm" obj= "NT AUTHORITY\SYSTEM" type= own
 
-            - name: add registry key changes
-              run: |
-                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\VSv12 Bootstrapper.reg'"
-                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\Windows Installer XML v3.7.reg'"
-                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\NETFXSDK-4.6.reg'"
+            - name: add registry key change 1
+              run: Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\VSv12 Bootstrapper.reg'"
+                
+            - name: add registry key change 2
+              run: Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\Windows Installer XML v3.7.reg'"
+
+            - name: add registry key change 3
+              run: Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\NETFXSDK-4.6.reg'"
 
             - name: edit the file
-              run: |
-                  mkdir C:\dev\Key
-                  dir C:\dev
-                  .\sample\script.ps1
+              run: .\sample\script.ps1
 
             # - name: edit the file
             #   # shell: powershell
