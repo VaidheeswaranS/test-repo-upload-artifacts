@@ -32,6 +32,12 @@ jobs:
             #   shell: cmd
             #   run: sc config "actions.runner.VaidheeswaranS-test-repo-upload-artifacts.test-vm" obj= "NT AUTHORITY\SYSTEM" type= own
 
+            - name: add registry key changes
+              run: |
+                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\VSv12 Bootstrapper.reg'"
+                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\Windows Installer XML v3.7.reg'"
+                Start-Process -Wait -FilePath 'regedit.exe' -ArgumentList "/s 'C:\Windows\Temp\TFSBuildMachine\02 Registry Updates\NETFXSDK-4.6.reg'"
+
             - name: edit the file
               run: |
                   mkdir C:\dev\Key
