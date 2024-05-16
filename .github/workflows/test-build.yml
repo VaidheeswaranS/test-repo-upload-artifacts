@@ -32,19 +32,19 @@ jobs:
                   echo "myWindowsID=$myWindowsID"
                   $myWindowsPrincipal=new-object System.Security.Principal.WindowsPrincipal($myWindowsID)
                   echo "myWindowsPrincipal=$myWindowsPrincipal"
-                  $adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
-                  New-Item -Path "$LocalTestDir\sysout.txt -ItemType File
-                  if ($myWindowsPrincipal.IsInRole($adminRole))
-                  { 
-                    echo "is admin" 
-                  }
-                  else {
-                    echo "is not admin";
-                    $passThruArgs = '-NoProfile -ExecutionPolicy Bypass -command', '&', "$env:GITHUB_WORKSPACE\sample\test-script.ps1", $arg, '*>', "`"$LocalTestDir\sysout.txt`"";
-                    Start-Process powershell -Wait -Verb RunAs -ArgumentList $passThruArgs;
-                    Get-Content "$LocalTestDir\sysout.txt";
-                  }
-                  dir "C:\var"
+                  # $adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
+                  # New-Item -Path "$LocalTestDir\sysout.txt -ItemType File
+                  # if ($myWindowsPrincipal.IsInRole($adminRole))
+                  # { 
+                  #   echo "is admin" 
+                  # }
+                  # else {
+                  #   echo "is not admin";
+                  #   $passThruArgs = '-NoProfile -ExecutionPolicy Bypass -command', '&', "$env:GITHUB_WORKSPACE\sample\test-script.ps1", $arg, '*>', "`"$LocalTestDir\sysout.txt`"";
+                  #   Start-Process powershell -Wait -Verb RunAs -ArgumentList $passThruArgs;
+                  #   Get-Content "$LocalTestDir\sysout.txt";
+                  # }
+                  # dir "C:\var"
 
             # - name: get the service name
             #   run: powershell "(Get-Service actions.runner.*).name"
