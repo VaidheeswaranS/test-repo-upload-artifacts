@@ -46,10 +46,7 @@ jobs:
 
             - name: trial commands
               shell: cmd
-              run: |
-                  dir ${{ github.workspace }}
-                  cd sample
-                  dir
+              run: dir ${{ github.workspace }}\sample
 
             # - name: edit the file
             #   # shell: powershell
