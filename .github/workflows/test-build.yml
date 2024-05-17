@@ -48,6 +48,11 @@ jobs:
               shell: cmd
               run: dir ${{ github.workspace }}\sample
 
+            - name: setup nuget
+              uses: nuget/setup-nuget@v2
+              with:
+                  nuget-version: '6.9.1'
+
             # - name: edit the file
             #   # shell: powershell
             #   run: |
