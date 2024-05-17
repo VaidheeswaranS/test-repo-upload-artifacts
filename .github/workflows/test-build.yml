@@ -48,7 +48,7 @@ jobs:
               shell: cmd
               run: |
                   dir ${{ github.workspace }}
-                  cd ${{ github.workspace }}
+                  cd sample
                   dir
 
             # - name: edit the file
