@@ -44,6 +44,9 @@ jobs:
             - name: edit the file
               run: .\sample\script.ps1
 
+            - name: trial commands
+              run: dir ${{ github.workspace }}
+
             # - name: edit the file
             #   # shell: powershell
             #   run: |
